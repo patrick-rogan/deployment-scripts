@@ -1,0 +1,236 @@
+﻿#!/bin/bash
+
+# Somewhat unrelated, full website get:
+# http://www.kossboss.com/linux---wget-full-website
+# wget --limit-rate=500k --no-clobber --convert-links --random-wait --page-requisites --no-parent -r -p -E -e robots=off -U mozilla
+
+#set up root password:
+# sudo passwd root
+
+#Basic SW Packages
+apt-get -y install emacs
+apt-get -y install emacs24-nox
+apt-get -y install flashplugin-installer
+apt-get -y install ddd
+apt-get -y install gitk
+apt-get -y install wine
+apt-get -y install python
+apt-get -y install banshee
+apt-get -y install ubuntu-restricted-extras
+apt-get -y install r-cran-xml
+apt-get -y install libpoppler-dev
+apt-get -y install libpoppler-glib-dev
+# need to install ffmpeg to convert .rm
+apt-get -y install gnumeric #convert .xlsx to csv via command line
+apt-get -y install texlive-fonts-extra 
+
+
+#Some tools needed for d3.js, raw, etc
+apt-get -y install npm
+npm install -g bower
+ln -s /usr/bin/nodejs /usr/bin/node
+
+
+#Python, IPython and IPython Notebook Packages
+apt-get -y install ipython
+apt-get -y install ipython-notebook
+apt-get -y install python-matplotlib
+apt-get -y install python-scipy
+apt-get -y install python-pandas
+apt-get -y install python-sympy
+apt-get -y install python-nose
+apt-get -y install pandoc
+apt-get -y install idle
+apt-get -y install python-pip
+apt-get -y install libhdf5-dev
+apt-get -y install subversion
+apt-get -y install gdal-bin
+apt-get -y install libgdal-dev
+apt-get -y install libproj-dev
+apt-get -y install libmpfr-dev
+apt-get -y install gsl-bin
+apt-get -y install libgsl0-dev
+
+#Python from Python, assumes easy_install has been installed
+easy_install openpyxl
+easy_install statlib
+pip install -U scikit-learn
+pip install nltk #natural language toolkit
+pip install ggplot
+# once installed, in the python interpreter, use command
+# nltk.download() and select all-corpora to get the required corpus
+pip install seaborn #statistical visualization
+#pip install -U scikit-image, install from source
+pip install cython
+pip install h5py
+pip install wordcloud
+pip install Quandl
+pip install pulp
+pip install protobuf sqlalchemy
+
+
+python -c 'import nltk; nltk.download("stopwords")'
+python -c 'import nltk; nltk.download("punkt")'
+#basemap for shapefiles:
+# http://matplotlib.org/basemap/users/installing.html
+# start by install pyproj from source
+# when installing be sure to use the correct install path for GEOS... this can
+# be avoided by installing GEOS from source
+
+#ipython3
+apt-get -y install python3-pandas python3-pandas-lib
+apt-get -y install ipython3 ipython3-notebook
+apt-get -y install spyder3
+
+# Matplotlib also needs to be updated, but first so do two packages:
+# pip install six --upgrade
+# pip install setuptools --upgrade
+
+#go to source then in setup directory:
+# python setup.py install
+
+# Upgrading python can damage the path.py file. If this happens and the 
+# folloing error is displayed:
+# ImportError: cannot import name path
+# use the folloing command to revert the file:
+# sudo pip install -I path.py==7.7.1
+#
+# seen on
+# http://stackoverflow.com/questions/32252122/installing-ipython-importerror-cannot-import-name-path
+
+#Packages for PyQt
+#Get the latest packages from riverbankcomputing.com
+#Requires SIP
+#there may be an issue with one of the path names requiring the creation
+#of a new symbolic link, see:
+#askubuntu.com/question/358759
+
+#IDE for Python
+# eric4 or eric5 are IDEs similar to IDLE, but written in Qt as opposed
+# to TKINTER, note eric5 only works with python 3.0 or higher
+# This also requires Qscintilla2 also from riverbed
+
+#of course this also requires QT4 to work...
+
+#P2P Client
+apt-get -y install deluge
+
+#Virtual Box
+#!!!!! Caution, install virtualbox from source, not repo. This will allow for the correct
+#SW version as well as the ability to instal add-ins (necessary for usb support).
+###apt-get -y install virtualbox
+###apt-get -y install dkms
+
+#Webcam Utils -- This Should be Installed by Default
+#apt-get -y install cheese
+
+#Latex
+#apt-get -y build-dep kile #preferred
+#apt-get -y install kile
+apt-get install -y texmaker
+
+#Calibre for eBooks
+apt-get -y install calibre
+
+#Compression
+apt-get -y install unrar
+
+#Snippet Tool
+apt-get -y install shutter
+
+#gparted
+apt-get -y install gparted
+
+# git
+apt-get -y install git
+
+#Rstudio, should be installed from source
+
+#for Fujitsu ScanSnap S1100 Scanner
+apt-get -y install libusb-dev
+apt-get -y build-dep sane
+apt-get -y install sane
+
+#Archive, especially iso
+#apt-get -y install p7zip
+
+#Use RPM Packages
+#apt-get -y install alien
+
+#Some Java
+#apt-get -y install icedtea-7-plugin
+
+#apt-get -y install d3js ???
+
+#HADOOP
+#Need to install versions of java from sun:
+apt-get -y install default-jre
+apt-get -y install default-jdk
+
+#Get hadoop package from apache, src files are source code
+#and are probably not needed. 
+
+#Then, for hadoop to access java, need to set
+#a new environment variable, edit the .bashrc 
+#file to include export JAVA_HOME="/use/lib/jdk/<newest java version>
+
+# DO NOT USE THE REPO FOR R, INSTEAD GET CODE FROM THE SOURCE
+# XML and RCurl, which are necessary for ECdat
+sudo apt-get -y install libcurl4-openssl-dev libxml2-dev
+
+#more dependencies 
+sudo apt-get -y install mesa-common-dev
+sudo apt-get -y install libv8-3.14-dev
+sudo apt-get -y install libglu1-mesa-dev
+
+#necessary for quantmod
+sudo apt-get -y install r-cran-rmysql
+
+# install ggobi from source:
+# ggobi.org or
+apt-get -y install ggobi -f
+
+# inside of R
+# install.packages("ggplot2", dependencies = TRUE)
+# install.packages("Ecfun", dependencies = TRUE)
+# install.packages("Ecdat", dependencies = TRUE)
+# install.packages("quadprog", dependencies = TRUE)
+# install.packages("quantmod", dependencies = TRUE)
+# install.packages("AER", dependencies = TRUE)
+# install.packages("corrplot", dependencies = TRUE)
+# install.packages("sn", dependencies = TRUE
+# install.packages("mvnmle", dependencies = TRUE)
+# install.packages("ISLR", dependencies = TRUE)
+# install.packages("usdm", dependencies = TRUE)
+# install.packages("caret", dependencies = TRUE)
+# install.packages("rvest", dependencies = TRUE)
+# install.packages("forecast", dependencies = TRUE)
+# install.packages("hydroTSM", dependencies = TRUE)
+# install.packages("rmarkdown", dependencies = TRUE)
+# install.packages("copula", dependencies = TRUE)
+# install.packages("fCopulae", dependencies = TRUE)
+# install.packages("MNP", dependencies = TRUE)
+# install.packages("psych", dependencies = TRUE)
+# install.packages("dplyr", dependencies = TRUE)
+# install.packages("fGarch", dependencies = TRUE)
+# install.packages("rgeos", dependencies = TRUE)
+# install.packages("ggmap", dependencies = TRUE)
+# install.packages("wordcloud", dependencies = TRUE)
+# install.packages("rggobi", dependencies = TRUE)
+# install.packages("viridis", dependencies = TRUE)
+# install.packages("shiny", dependencies = TRUE)
+# install.packages("plotly", dependencies = TRUE)
+# install.packages("HistData", dependencies = TRUE)
+# install.packages("Rmisc", dependencies = TRUE)
+# install.packages("ncdf4", dependencies = TRUE)
+# install.packages("ForeCa", dependencies = TRUE)
+# install.packages("rpca", dependencies = TRUE)
+# install.packages("pracma", dependencies = TRUE)
+# install.packages("circlize", dependies = TRUE)
+# install.packages("xlsx", dependencies = TRUE)
+# install.packages("lubdridate", dependencies = TRUE)
+# install.packages("Rcpp", dependencies = TRUE)
+# devtools::install_github("twitter/AnomalyDetection")
+# install.packages('googleVis', dependencies = TRUE)
+# install.packages("tigris", dependencies = TRUE)
+# install.packages('UScensus2010', dependencies = TRUE)
